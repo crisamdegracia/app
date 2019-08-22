@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Wordpress Cheat Sheet</title>
+        <style>
+            body {
+                background: #333;
+
+            }
+
+            .main {
+                background-color: #222;
+                border: 1px solid #aaa;
+                padding: 5px;
+            }
+
+            h3 {
+                color: #222;
+                border: 1px solid yellowgreen;
+                background-color: #aaa;
+            }
+
+            pre,li {
+                color: #ccc;
+                font-family:monospace;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div id="accordion">
+            <h3> Mixed info's and hierarchy</h3>
+            <div class="main">
+
+                index.php -  the last file to look
+                single.php - where all the single blog post
+                page.php - single pages are also powered by index.php kapag hind naka create ng page.php
+
+            </div>
+
+            <h3> vid 3 - vagrant local envi</h3>
+            <div class="main">
+                <li>
+                    on git bash - type vagrant up - to start local environment
+                </li>
+                <li>change the local server 192.168.56.101 to fictional university - go to programfiles/system32/driver/etc/hosts </li>
+                <li> vagrant halt - to stop local envi </li>
+            </div>
+            <h3>vid 6 - Install Wordpress on vagrant local environment </h3>
+            <div class="main">
+
+            </div>
+            <h3>vid 8 - WordPress some functions example </h3>
+            <div class="main">
+                <pre>
+              on GENERAL SETTINGS
+               bloginfo('name')  -  Site title 
+               bloginfo('description) - Tagline
+
+           </pre>
+            </div>
+
+            <h3>vid 10 - Wordpress Loop </h3>
+            <div class="main">
+                <pre>
+
+                    while (have_posts()) {
+                    the_post();
+
+                    the_title();
+                    the_content();
+                    the_permalink();
+                    }
+
+                </pre>
+            </div>
+
+            <h3>vid 11 - Header and Footer </h3>
+            <div class="main">
+                <pre>
+
+function university_files(){
+
+    // 2 args 
+    // 1st name doest matter - just to name
+    // 2nd the location or link
+    wp_enqueue_style('university_main_styles', get_stylesheet_uri() );
+}
+
+// 2 arguments
+// 1st - what we want to do - hook name
+// 2nd - function to run
+add_action('wp_enqueue_scripts', 'university_files' );
+
+
+
+           </pre>
+
+
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( "#accordion" ).accordion();
+            } );
+        </script>
+
+    </body>
+</html>
