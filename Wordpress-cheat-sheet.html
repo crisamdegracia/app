@@ -6,9 +6,10 @@
         <style>
             body {
                 background: #333;
+                color: #ccc;
 
             }
-
+            textarea,
             .main {
                 background-color: #222;
                 border: 1px solid #aaa;
@@ -20,10 +21,24 @@
                 border: 1px solid yellowgreen;
                 background-color: #aaa;
             }
-
+            h4 {
+                color: yellowgreen;
+            }
             pre,li {
                 color: #ccc;
                 font-family:monospace;
+            }
+
+            textarea {
+
+                height: 130px;
+                width: 1080px;
+                resize: both;
+                border: none;
+                border-bottom: 1px dashed #bbb;
+                color: #ddd;
+                text-align:;
+
             }
 
         </style>
@@ -31,15 +46,101 @@
     <body>
 
         <div id="accordion">
-            <h3> Mixed info's and hierarchy</h3>
-            <div class="main">
 
-                index.php -  the last file to look
-                single.php - where all the single blog post
-                page.php - single pages are also powered by index.php kapag hind naka create ng page.php
+            <h3> Hierarchy</h3>
+            <div>
+                <textarea>
+                    index.php -  the last file to look
+                    single.php - where all the single blog post
+                    page.php - single pages are also powered by index.php kapag hind naka create ng page.php
 
+                </textarea>
             </div>
 
+            <h3>Functions</h3>
+            <div>
+                <pre>
+                     // 4 args for script
+    // 1st name
+    // 2nd location
+    // 3rd if the srcipt is depending on another script so. NULL
+    // 4th Version
+    //5th do you want load the file right before closing of the body tag? Yes or No for true or false
+    wp_enqueue_script('main-university-script', get_theme_file_uri('/js/scripts-bundled.js'), NULL, '1.0', true );
+
+    // 2 args for styles
+    // 1st name doest matter - just to name
+    // 2nd the location or link
+
+    wp_enqueue_style('university_main_styles', get_stylesheet_uri() );
+    wp_enqueue_style('font-awesome', "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+    wp_enqueue_style('googlefont', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
+
+                </pre>
+
+                <ul>
+                    <li>
+                        wp_list_pages - to list all the page of our website 
+                        <ul>
+                            <li>
+                                <pre>
+                                     if( $theParent ) {
+                                   $theChildOf = $theParent;
+
+                               } else {
+                                   $theChildOf = get_the_ID();
+                               }
+
+                           wp_list_pages( array(
+
+                               //will remove the head title PAGES
+                               'title_li' => NULL,
+                               //will output the child of current page if has parent
+                               'child_of' => $theChildOf
+                           )) ;  ?>
+                                </pre>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+
+                <ul>
+                    <li> RETURN - sa function kapag tapos na ung process ibig sabihin tapos na na wala ng ibang gagawin - pero kung unbg return papalitan natin ng echo - ibig sabihin ung echo my iaaout agad - ung return wala. need pa nating mag lagay ng command para magamit ung output nya. gulo ba?
+                    </li>
+                </ul>
+            </div>
+            <h3> Theme Supports </h3>
+            <div class="main">
+                <ul>
+                    <li><pre>
+
+                       function university_features() {
+                        add_theme_support('title-tag');
+                        }
+                        add_action('after_setup_theme', 'university_features');
+
+                    </pre>
+                    </li>
+                    <li> add_theme_support('title-tag');  </li>
+                </ul>
+            </div>
+            <h3> Tricks </h3>
+            <div class="main">
+                <ul>
+                    <li>
+                        showing child page to the parent page - vid 15 - 
+                    </li>
+                    <li> get_the_ID() - get the id of the current page </li>
+                    <li> wp_get_parent_post_id( get_the_ID() ) - shows the parent page ID </li>
+                    <li> if( wp_get_post_parent_id( get_the_ID() ) ) {   if the current page has a parent page this will be true</li>
+
+                    <li> the_title() - will give us the current post title of the page </li>
+                    <li> get_the_title() will allow us to give an id of the page to the parenthesis</li>
+                    <li> get_the_permalink() - same explaination above</li>
+                </ul>
+            </div>
             <h3> vid 3 - vagrant local envi</h3>
             <div class="main">
                 <li>
@@ -48,7 +149,7 @@
                 <li>change the local server 192.168.56.101 to fictional university - go to programfiles/system32/driver/etc/hosts </li>
                 <li> vagrant halt - to stop local envi </li>
             </div>
-            <h3>vid 6 - Install Wordpress on vagrant local environment </h3>
+            <h3>vid 6 - Install Wordpress on vagrant local environment  </h3>
             <div class="main">
 
             </div>
@@ -94,22 +195,119 @@ function university_files(){
 // 2nd - function to run
 add_action('wp_enqueue_scripts', 'university_files' );
 
-
-
            </pre>
+            </div>
 
+            <h3>Vid 12 - Convert static HTML into WordPress</h3>
+            <div class="main">
+                <ul>
+                    <li>put all the link like style.css, fontawesome inside functions.php with a clause of wp_enqueue_style()</li>
+                    <li>some of the codes for this vid was place on Functions pektus TAB</li>
+                </ul>
+            </div>
+
+            <h3>Vid 13 - Avoiding Caching CSS and JS during dev </h3>
+            <div class="main">
+                <pre>
+            // 4 args for script
+    // 1st name
+    // 2nd location
+    // 3rd if the srcipt is depending on another script so. NULL
+    // 4th Version or can be a php function called microtime()
+    // 4th microtime to download a new file each time browser reloads
+    //5th do you want load the file right before closing of the body tag? Yes or No for true or false
+    wp_enqueue_script('main-university-script', get_theme_file_uri('/js/scripts-bundled.js'), microtime() , '1.0', true );
+
+        </pre>
+            </div>
+            <h3>Vid 14 - Interior Page Template </h3>
+            <ul>
+                <li> Dynamic title for every page <ul>
+                    <li>
+                        <pre>
+                  function university_features() {
+            add_theme_support('title-tag');
+            }
+            add_action('after_setup_theme', 'university_features');       
+
+
+                        </pre>
+                    </li>
+                    </ul></li>
+            </ul>  
+            <h3> Vid 15 - Parent and Children </h3>
+            <div class="main">
+
+                <pre>
+    if( wp_get_post_parent_id( get_the_ID() ) ) { 
+        will be true only if the current page has a parent page.
+    }
+</pre>
+                <h4> will give the parent and siblings page a correct breadcrumbs </h4>
+                <textarea>  
+                    <?php $theParent =  wp_get_post_parent_id( get_the_ID() );
+if( $theParent ) { ?>
+
+                    <div class="metabox metabox--position-up metabox--with-home-link">
+                        <p><a class="metabox__blog-home-link" href="<?php echo get_permalink( $theParent ); ?>"><i class="fa fa-home" aria-hidden="true"></i> Back to <?php echo get_the_title( $theParent ); ?></a> <span class="metabox__main"><?php the_title(); ?></span></p>
+                    </div>
+                </textarea>
+
+            </div>  
+
+
+            <h3> Vid 16 - Why echo get_the_title() and not the the_title()</h3>
+            <div class="main">
 
             </div>
-        </div>
+
+            <h3> Vid 17 - Menu of Child Page Links </h3>
+            <div class="main">
+                <li> $theParent is the ID of current PARENT page</li>
+                <textarea>
+                    //if the page has current children will return a list of children pages
+                    //false - return nothing
+                    $checkArray = get_pages(array(
+                    'child_of' => get_the_ID()
+                    )); 
+                    if($theParent or $checkArray ){ ?>
+
+                    <h2 class="page-links__title"><a href="<?php echo get_permalink($theParent) ?>">[?php echo get_the_title($theParent) ?></a></h2>
+                    [ul class="min-list">
+
+                    if( $theParent ) {
+                    $theChildOf = $theParent;
+                    } else {
+                    $theChildOf = get_the_ID();
+                    }
+                    wp_list_pages( array(
+
+                    //will remove the head title PAGES
+                    'title_li' => NULL,
+                    //will output the child of current page if has parent
+                    'child_of' => $theChildOf,
+
+                    // we can decide what is the mauuna sa list pf page
+                    //by going to the child dashboard page tapos
+                    // we can pick the number order there. gets mo?
+                    'sort_column' => 'menu_order'
+                    )) ;
+                </textarea>
+
+            </div>
 
 
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-            $( function() {
-                $( "#accordion" ).accordion();
-            } );
-        </script>
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script>
+                $( function() {
+                    $( "#accordion" ).accordion({
+                        heightStyle: "content",
+                        collapsible: true
+                    });
+                } );
 
-    </body>
-</html>
+            </script>
+
+            </body>
+        </html>
