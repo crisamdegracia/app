@@ -50,9 +50,10 @@
             <h3> Hierarchy</h3>
             <div>
                 <textarea>
-                    index.php -  the last file to look
+                    index.php -  the last file to look  
                     single.php - where all the single blog post
                     page.php - single pages are also powered by index.php kapag hind naka create ng page.php
+                    front-page.php - for home -- without this file, we will use index.php
 
                 </textarea>
             </div>
@@ -78,6 +79,33 @@
 
                 </pre>
 
+
+                <pre>
+                   the_time('n.j.y')  
+                   F - month
+                   Y - year
+                   DAY-OF-MONTH
+                   d - Numeric, with leading zeros - 01-31
+                   j - Numeric, without leading zeros 1-31
+                   S - the english suffix for the day of the month   -st-nd or th- inthefirst, 2nd or 15th
+                   WEEKDAYS
+                   l - full name (lowercase 'L')  - sunday - saturday
+                   D - Three letter name - mon-sun
+                   MONTH
+                   m - Numeric with leading zeros 01-12
+                   n - Numeric, without leading zeros 1-12
+                   F - Textual full - January - December
+                   M - Textual three letters  - Jan - Dec
+                   YEAR
+                   Y - Numeric 4 digits - 1999 - 2003
+                   y - Numeric 2 digits - 99 - 03 
+               </pre>
+
+                <pre>
+                   get_the_category_list(', ')  - the coma is for when it has a multiple category. its like its a separator
+
+                   the_author_posts_link() - name of user with link
+               </pre>
                 <ul>
                     <li>
                         wp_list_pages - to list all the page of our website 
@@ -225,10 +253,12 @@ add_action('wp_enqueue_scripts', 'university_files' );
         </pre>
             </div>
             <h3>Vid 14 - Interior Page Template </h3>
-            <ul>
-                <li> Dynamic title for every page <ul>
-                    <li>
-                        <pre>
+            <div class="main">
+
+                <ul>
+                    <li> Dynamic title for every page <ul>
+                        <li>
+                            <pre>
                   function university_features() {
             add_theme_support('title-tag');
             }
@@ -236,12 +266,13 @@ add_action('wp_enqueue_scripts', 'university_files' );
 
 
                         </pre>
-                    </li>
-                    </ul></li>
-            </ul>  
+                        </li>
+                        </ul></li>
+                </ul>  
+
+            </div>
             <h3> Vid 15 - Parent and Children </h3>
             <div class="main">
-
                 <pre>
     if( wp_get_post_parent_id( get_the_ID() ) ) { 
         will be true only if the current page has a parent page.
@@ -310,6 +341,49 @@ if( $theParent ) { ?>
                     <li> charset - telling us the browser what type are characters and numbers be using on the page </li>
                     <li> add body_class() to the body class</li>
                 </ul>
+            </div>
+
+
+            <h3>Vid 19 - Navigation Menu </h3>
+
+            <div class="main">
+
+                <pre>
+
+
+                   ADD NAV PAGES
+                register_nav_menu('headerMenuLocation', 'Menu Header Location');
+                register_nav_menu('footerLocationOne', 'Footer Location One');
+                register_nav_menu('footerLocationTwo', 'Footer Location Two');
+
+                    wp_nav_menu(array(
+                    'theme_location'    =>  'headerMenuLocation'
+                        ); 
+
+
+                    checking if  the page is on an active window
+
+                     if ( is_page('about-us')  or wp_get_post_parent_id(0) == 11 ) echo 'class="current-menu-item"'
+                </pre>
+            </div>
+
+
+            <h3> Vid 20 -  Blog Listing Page (index_php vs front-page_php)</h3>
+            <div class="main">
+                <textarea>
+                    <div class="post-item">
+                        <h2 class="headline headline--medium headline--post-title"> <a href="<?php the_permalink() ?>"> <?php the_title() ?></a></h2>
+
+                        <div class="metabox">
+                            <p>Posted by: <?php the_author_posts_link(); ?> on <?php the_time('n.j.y') ?> in <?php echo get_the_category_list(', ')  ?>   </p>
+                        </div>
+
+                        <div class="generic-content">
+                            <?php the_excerpt(); ?>
+                            <a class="btn btn--blue" href="<?php the_permalink() ?>">Continue reading &raquo; </a>
+                        </div>
+                    </div>   
+                </textarea>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

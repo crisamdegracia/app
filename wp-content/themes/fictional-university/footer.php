@@ -16,12 +16,26 @@
                 <div class="site-footer__col-two">
                     <h3 class="headline headline--small">Explore</h3>
                     <nav class="nav-list">
-                        <ul>
-                            <li><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
-                            <li><a href="<?php echo site_url('/programs') ?>">Programs</a></li>
-                            <li><a href="<?php echo site_url('/events') ?>">Events</a></li>
-                            <li><a href="<?php echo site_url('/campuses') ?>">Campuses</a></li>
-                        </ul>
+
+
+                        <?php 
+
+   /* wp_nav_menu(array(
+
+        'theme_location'    =>  'footerLocationOne'
+
+
+    ));*/
+
+                        ?>
+
+                       
+<ul>
+<li><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
+<li><a href="<?php echo site_url('/programs') ?>">Programs</a></li>
+<li><a href="<?php echo site_url('/events') ?>">Events</a></li>
+<li><a href="<?php echo site_url('/campuses') ?>">Campuses</a></li>
+</ul>
                     </nav>
                 </div>
 
@@ -56,7 +70,7 @@
 
 
 <?php 
-wp_footer();
+    wp_footer();
 ?>
 
 </body>
