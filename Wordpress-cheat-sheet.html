@@ -50,11 +50,11 @@
             <h3> Hierarchy</h3>
             <div>
                 <textarea>
-                    index.php -  the last file to look  
-                    single.php - where all the single blog post
-                    page.php - single pages are also powered by index.php kapag hind naka create ng page.php
+                    index.php -  the last file to look  - last line of defense!
+                    single.php - where all the single blog post -- individual blog post
+                    page.php - single pages are also powered by index.php kapag hind naka create ng page.php -- individual pages
                     front-page.php - for home -- without this file, we will use index.php
-
+                    archive.php - the author or the categories  - we can copy index.php then modify a bit
                 </textarea>
             </div>
 
@@ -130,6 +130,13 @@
                             </li>
                         </ul>
                     </li>
+                   <li>
+                    single_cat_title()  - will show single page category title
+                   </li>
+                   <li>
+                       the_archive_title()  - ALL the archive title. year-month-day-category-author-
+                       the_archive_description() - small message - if for author - the biography will show up.
+                   </li>
                 </ul>
 
 
@@ -384,6 +391,47 @@ if( $theParent ) { ?>
                         </div>
                     </div>   
                 </textarea>
+            </div>
+            
+            <h3> Vid 21 - Fixing the blog section index.php as blog section </h3>
+            <div class="main">
+                <ul>
+                    <li>
+                        adding metabox
+                    </li>
+                    <li> fixing single.php and index.php as blog </li>
+                </ul>
+            </div>
+            
+            <h3> Vid 22 - Archive.php </h3>
+            <div class="main">
+                <ul>
+                    <li> archive.php - will serve the categories or the author </li>
+                    <li> we will look if the page os looking for category or false
+                        <pre>
+                            if (is_category()))  single_cat_title() -> category title
+                        </pre>
+                    </li>
+                    
+                    <li> we will look if we are looking for an author page.
+                    <pre> 
+                        if(is_author() )  - the_author()
+                    </pre>
+                    </li>
+                    <li>
+                        PERO HIND PALA MAGANDA UNG MGA NAUNA lets check this out!
+                        
+                        <pre>
+                            the_archive_title()  - will give us all the archive title might have.
+                            month -
+                            day-
+                            year-
+                            author-
+                            category-
+                        </pre>
+                    </li>
+                    <li> the_archive_description() - brpther of the_archive_title()</li>
+                </ul>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
