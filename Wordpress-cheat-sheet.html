@@ -130,13 +130,14 @@
                             </li>
                         </ul>
                     </li>
-                   <li>
-                    single_cat_title()  - will show single page category title
-                   </li>
-                   <li>
-                       the_archive_title()  - ALL the archive title. year-month-day-category-author-
-                       the_archive_description() - small message - if for author - the biography will show up.
-                   </li>
+                    <li>
+                        single_cat_title()  - will show single page category title
+                    </li>
+                    <li>
+                        the_archive_title()  - ALL the archive title. year-month-day-category-author-
+                        the_archive_description() - small message - if for author - the biography will show up.
+                    </li>
+                    <li>wp_trim_words(get_the_content(), 18) - 1st args the content we want to limit 2ND - is how many words</li>
                 </ul>
 
 
@@ -392,7 +393,7 @@ if( $theParent ) { ?>
                     </div>   
                 </textarea>
             </div>
-            
+
             <h3> Vid 21 - Fixing the blog section index.php as blog section </h3>
             <div class="main">
                 <ul>
@@ -402,7 +403,7 @@ if( $theParent ) { ?>
                     <li> fixing single.php and index.php as blog </li>
                 </ul>
             </div>
-            
+
             <h3> Vid 22 - Archive.php </h3>
             <div class="main">
                 <ul>
@@ -412,15 +413,15 @@ if( $theParent ) { ?>
                             if (is_category()))  single_cat_title() -> category title
                         </pre>
                     </li>
-                    
+
                     <li> we will look if we are looking for an author page.
-                    <pre> 
+                        <pre> 
                         if(is_author() )  - the_author()
                     </pre>
                     </li>
                     <li>
                         PERO HIND PALA MAGANDA UNG MGA NAUNA lets check this out!
-                        
+
                         <pre>
                             the_archive_title()  - will give us all the archive title might have.
                             month -
@@ -433,6 +434,40 @@ if( $theParent ) { ?>
                     <li> the_archive_description() - brpther of the_archive_title()</li>
                 </ul>
             </div>
+
+            <h3>Vid 23 - Custom Queries</h3>
+            <div class="main">
+                <pre>
+
+    $homepagePosts = new WP_QUERY( array( 
+
+        'posts_per_page'    => 2,
+        'category_name'     => 'Jabar'
+    ));
+         while ( $homepagePosts->have_posts() ) {
+             $homepagePosts->the_post(); ?            
+
+            <div class="event-summary">
+                <a class="event-summary__date event-summary__date--beige t-center" href="?php the_permalink() ?">
+                    <span class="event-summary__month"> ?php the_time('M') ?</span>
+                    <span class="event-summary__day"> ?php the_time('d') ?</span>  
+                </a>
+                <div class="event-summary__content">
+                    <h5 class="event-summary__title headline headline--tiny"><a href="?php the_permalink() ?"> ?php the_title(); ?</a></h5>
+                    <p>?php echo wp_trim_words(get_the_content(),18) ? <a href="?php the_permalink() ?" class="nu gray">Read more</a></p>
+                </div>
+            </div>
+
+            ?php } 
+         /* Important! para mareset ung QUERY sa WHILE LOOP */
+            wp_reset_postdata();
+            ?
+                </pre>
+            </div>
+            <h3>Vid 24 - Quick Edits </h3>
+            <li>
+                if (get_post_type() == 'post') => trying to confirm if we are on Page or Posts
+            </li>
         </div>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
